@@ -1,0 +1,32 @@
+从排序数组中删除重复项
+
+给定一个有序数组，你需要原地删除其中的重复内容，使每个元素只出现一次,并返回新的长度。
+要求不要另外定义一个数组，您必须通过用 O(1) 额外内存原地修改输入的数组来做到这一点。
+
+tip：数组问题一般采用循环遍历的方式来解决，如果一个下标无法满足需求，那么可以采用多个下标的方式来解决问题。
+
+解决方案：
+采用两个下标，一个下标循环遍历数组，一个下标用于标明无重复数组元素的位置，依次添加即可。
+
+code：
+class Solution {
+    public int removeDuplicates(int[] nums) {
+        int length = nums.length;
+        if(length == 1){
+            return length;
+        }
+        if(length==0){
+            return 0;
+        }
+        int num = 0;
+        for(int i=0;i<length-1;i++){
+            if(nums[num]==nums[i+1]){
+                continue;
+            }else{
+                nums[num+1]=nums[i+1];
+                num++;
+            }
+        }
+        return num+1;
+    }
+}
