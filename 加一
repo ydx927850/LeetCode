@@ -1,0 +1,29 @@
+给定一个非负整数组成的非空数组，给整数加一。
+
+可以假设整数不包含任何前导零，除了数字0本身。
+
+最高位数字存放在列表的首位。
+例如
+[1,2,3,4]--->[2,3,4,5]
+[9,9,9,9]--->[1,0,0,0,0]
+
+方案：
+从最后一位遍历，如果小于9就加1直接返回，是9就设置为0，如果循环到第一位仍然满足设为0的条件，说明要进位，则返回新数组，长度为原数组加1即可。
+
+code：
+class Solution {
+    public int[] plusOne(int[] digits) {
+        int length = digits.length;
+        for(int i=length-1;i>=0;i--){
+            if(digits[i]<9){
+                digits[i]++;
+                return digits;
+            }else{
+                digits[i]=0;
+            }
+        }
+        int[] result = new int[length+1];
+        result[0]=1;
+        return result;
+    }
+}
