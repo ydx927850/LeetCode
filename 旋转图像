@@ -1,0 +1,50 @@
+给定一个 n × n 的二维矩阵表示一个图像。
+
+将图像旋转 90 度（顺时针）。
+
+注意：
+
+你必须在原矩阵中旋转图像，请不要使用另一个矩阵来旋转图像。
+
+例 1:
+
+给出的输入矩阵 = 
+[
+  [1,2,3],
+  [4,5,6],
+  [7,8,9]
+],
+
+旋转输入矩阵，使其变为 :
+[
+  [7,4,1],
+  [8,5,2],
+  [9,6,3]
+]
+
+方案：
+将数组先上下折叠，然后再对角线交换即可。
+
+code：
+class Solution {
+    public void rotate(int[][] matrix) {
+        int n=matrix.length;
+        //先上下折叠
+        for(int i=0;i<n/2;i++){
+            int j = n-i-1;
+            for(int k=0;k<n;k++){
+                int tmp = matrix[i][k];
+                matrix[i][k] = matrix[j][k];
+                matrix[j][k]= tmp;
+            }
+        }
+        //再对角线交换
+        for(int i=0;i<n;i++){
+            for(int j=0;j<i;j++){
+                int tmp = matrix[i][j];
+                matrix[i][j] = matrix[j][i];
+                matrix[j][i]= tmp;
+            }
+        }
+    }
+}
