@@ -1,0 +1,57 @@
+判断一个数独是否有效，根据：Sudoku Puzzles - The Rules。
+
+数独部分填了数字，空的部分用 '.' 表示。
+
+一个有效的数独（填了一部分的）不一定是可解的，只要已经填的数字是有效的即可。
+
+方案：
+判断行，列，九宫格是否有重复即可
+
+code：
+class Solution {
+    public boolean isValidSudoku(char[][] board) {
+        if(null == board || board.length<9){
+            return false;
+        }
+        
+        Set<Character> rowSet = new HashSet<>();
+        Set<Character> colSet = new HashSet<>();
+        Set<Character> cardSet = new HashSet<>();
+        
+        for(int i=0;i<9;i++){
+            rowSet.clear();
+            colSet.clear();
+            cardSet.clear();
+            
+            for(int j=0;j<9;j++){
+                //判断行有无重复
+                if(rowSet.contains(board[i][j])){
+                    return false;
+                }else{
+                    if('.' != board[i][j]){
+                        rowSet.add(board[i][j]);
+                    }
+                }  
+                //判断列有无重复
+                if(colSet.contains(board[j][i])){
+                    return false;
+                }else{
+                    if('.' != board[j][i]){
+                        colSet.add(board[j][i]);
+                    }
+                }   
+                //判断九宫格有无重复，每次计算九宫格行列
+                int row = i/3*3+j/3;
+                int col = j%3+i%3*3;
+                if(cardSet.contains(board[row][col])){
+                    return false;
+                }else{
+                    if('.' != board[row][col]){
+                        cardSet.add(board[row][col]);
+                    }
+                }
+            } 
+        }
+        return true;
+    }
+}
